@@ -7,9 +7,9 @@ const collectEmployees = function() {
   let repeat = true;
   while(repeat){
     const employee = {
-      firstName: [prompt("Enter first name")],
-      lastName: [prompt("Enter last name")],
-      salary: [prompt("Enter salary")]
+      firstName: prompt("Enter first name"),
+      lastName: prompt("Enter last name"),
+      salary: prompt("Enter salary")
     }
     employees.push(employee);
     repeat = prompt("Add another Employee?\n[Y] Yes\n[N] No");
