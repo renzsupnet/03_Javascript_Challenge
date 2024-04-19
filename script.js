@@ -3,21 +3,52 @@ const addEmployeesBtn = document.querySelector('#add-employees-btn');
 // Collect employee data
 const collectEmployees = function() {
   // TODO: Get user input to create and return an array of employee objects
+  
+  // Initial empty array where employee objects will be stored.
   const employees = [];
+
+  // Initial repeat state that determines if the loop continues or not
   let repeat = true;
+
+  // This loop allows the user to add employees as often as needed.
   while(repeat){
-    const employee = {
-      firstName: prompt("Enter first name"),
-      lastName: prompt("Enter last name"),
-      salary: prompt("Enter salary")
+
+    //The prompts are initialized and checks whether there is an input if not then cancels the prompt when the cancel button is pressed.
+    let firstNameInput = prompt("Enter first name");
+    if(!firstNameInput){
+      return;
     }
+    let lastNameInput = prompt("Enter last name");
+    if(!lastNameInput){
+      return;
+    }
+    let salaryInput = prompt("Enter salary");
+    if(!salaryInput){
+      return;
+    }
+    // This creates the employee object.
+    const employee = {
+      firstName: firstNameInput,
+      lastName: lastNameInput,
+      salary: salaryInput
+    }
+
+    //This pushes the employee object into the array.
     employees.push(employee);
+
+    //This is the loop conditional input as to whether to add more employees or not.
     repeat = prompt("Add another Employee?\n[Y] Yes\n[N] No");
+    if(!repeat){
+      return;
+    }
+    // Input syntax checker to lessen user error.
     const acceptableInputs = ['Y', 'y', 'N', 'n'];
     if (!acceptableInputs.includes(repeat)){
       alert("Invalid Input please input Y/y for Yes and N/n for No.");
       repeat = prompt("Add another Employee?\n[Y] Yes\n[N] No");
     }
+
+    // Stops the loop if the user inputs n or N.
     if (repeat === "N" || repeat === "n"){
       repeat = false;
     }
@@ -31,8 +62,12 @@ const displayAverageSalary = function(employeesArray) {
   let totalSalary = 0;
   for (let i = 0; i < employeesArray.length; i++) {
     const currentEmployee = employeesArray[i];
+
+    // The Number function converts the input from a string to a number.
     totalSalary+= Number(currentEmployee.salary);
   }
+
+  // Average is calculated by dividing the total salary with the number of employees which is then logged into the console with 2 decimal points.
   let aveSalary = totalSalary/ employeesArray.length;
   console.log(`The average salary between our ${employeesArray.length} employee(s) is $${aveSalary.toFixed(2)}`);
 }
@@ -40,6 +75,7 @@ const displayAverageSalary = function(employeesArray) {
 // Select a random employee
 const getRandomEmployee = function(employeesArray) {
   // TODO: Select and display a random employee
+  // Math.random and Math.floor is used to randomly select an employee.
   let randEmployee = employeesArray[Math.floor(Math.random() * employeesArray.length)];
   console.log(`Congratulations to ${randEmployee.firstName} ${randEmployee.lastName}, our random drawing winner!`); 
 }
